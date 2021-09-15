@@ -61,7 +61,7 @@ steps:
     key:
       from_secret: SSH_KEY
     recursive: true
-    source: ./dist
+    source: ./dist/
     target: ~/sites/dashboard-apps
     script:
       - echo "Done"
