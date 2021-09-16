@@ -152,7 +152,7 @@ services:
         logo: "assets/tools/portainer.png"
         subtitle: "Docker monitoring"
         tag: "devops"
-        url: "https://portainer.princelle.org"
+        url: "https://portainer.cloud.princelle.org"
         target: "_blank"
       - name: "Tautulli"
         logo: "assets/tools/tautulli.png"
