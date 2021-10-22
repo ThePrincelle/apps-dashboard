@@ -36,6 +36,24 @@ steps:
         "user": "ubb25dk7snjn9hri5137moi3q5k53a",
         "message": "Mise en production de 'apps-dashboard'."
       }
+  when:
+    status:
+    - success
+
+- name: notify build failed
+  image: plugins/webhook
+  settings:
+    urls: https://api.pushover.net/1/messages.json
+    content_type: application/json
+    template: |
+      {
+        "token": "a3arkn5phqihc15auh7ikayxr5yiub",
+        "user": "ubb25dk7snjn9hri5137moi3q5k53a",
+        "message": "Build de 'apps-dashboard' en erreur."
+      }
+  when:
+    status:
+    - failure
 
 - name: cleaning
   image: appleboy/drone-ssh
@@ -78,6 +96,24 @@ steps:
         "user": "ubb25dk7snjn9hri5137moi3q5k53a",
         "message": "L'application 'apps-dashboard' a bien été déployée sur l'infrastructure Infomaniak."
       }
+  when:
+    status:
+    - success
+
+- name: notify deploy failed
+  image: plugins/webhook
+  settings:
+    urls: https://api.pushover.net/1/messages.json
+    content_type: application/json
+    template: |
+      {
+        "token": "a3arkn5phqihc15auh7ikayxr5yiub",
+        "user": "ubb25dk7snjn9hri5137moi3q5k53a",
+        "message": "Le déploiement de 'apps-dashboard' sur l'infrastructure Infomaniak a échoué."
+      }
+  when:
+    status:
+    - failure
 
 trigger:
   branch:
