@@ -7,4 +7,4 @@ Based on [homer](https://github.com/bastienwirtz/homer).
 
 Deployed on Infomaniak.
 
-[![Build Status](https://ci.princelle.org/api/badges/ThePrincelle/homer/status.svg)](https://ci.princelle.org/ThePrincelle/homer)
+[![Deployment Status](https://github.com/ThePrincelle/apps-dashboard/actions/workflows/main.yml/badge.svg)](https://github.com/ThePrincelle/apps-dashboard/actions/workflows/main.yml)

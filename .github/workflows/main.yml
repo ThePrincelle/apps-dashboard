@@ -1,0 +1,66 @@
+name: Deployment
+
+on:
+  push:
+    branches: [ main ]
+    
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '17.x'
+      
+      - name: Notify
+        uses: jasongitmail/fast-webhook@v1.1.4
+        with:
+          url: https://api.pushover.net/1/messages.json
+          json: |
+            {
+              "token": "${{ secrets.PUSHOVER_TOKEN }}",
+              "user": "${{ secrets.PUSHOVER_USER }}",
+              "message": "Démarrage du build pour 'apps-dashboard'."
+            }
+      - name: Install dependancies
+        run: npm install
+          
+      - name: Build
+        run: npm run-script build
+          
+      - name: Notify
+        uses: jasongitmail/fast-webhook@v1.1.4
+        with:
+          url: https://api.pushover.net/1/messages.json
+          json: |
+            {
+              "token": "${{ secrets.PUSHOVER_TOKEN }}",
+              "user": "${{ secrets.PUSHOVER_USER }}",
+              "message": "Mise en production de 'apps-dashboard'."
+            }
+          
+      - name: Deploy to Infomaniak
+        uses: wlixcc/SFTP-Deploy-Action@v1.0
+        with:
+          username: '464i8_ci'
+          server: '464i8.ftp.infomaniak.com'
+          ssh_private_key: ${{ secrets.SSH_KEY }} 
+          local_path: './dist/*'
+          remote_path: './sites/dashboard-apps'
+          
+      - name: Notify
+        uses: jasongitmail/fast-webhook@v1.1.4
+        with:
+          url: https://api.pushover.net/1/messages.json
+          json: |
+            {
+              "token": "${{ secrets.PUSHOVER_TOKEN }}",
+              "user": "${{ secrets.PUSHOVER_USER }}",
+              "message": "L'application 'apps-dashboard' a bien été déployée sur l'infrastructure Infomaniak."
+            }
