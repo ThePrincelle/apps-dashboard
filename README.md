@@ -5,6 +5,4 @@ princelle.org apps dashboard.
 
 Based on [homer](https://github.com/bastienwirtz/homer).
 
-Deployed on Infomaniak.
-
-[![Deployment Status](https://github.com/ThePrincelle/apps-dashboard/actions/workflows/main.yml/badge.svg)](https://github.com/ThePrincelle/apps-dashboard/actions/workflows/main.yml)
+Deployed on Cloudflare.
